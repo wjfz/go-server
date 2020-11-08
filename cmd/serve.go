@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"syscall"
 	"time"
 	"wserver/pkg/rlogging"
 	"wserver/routers"
@@ -52,7 +53,7 @@ var serveCmd = &cobra.Command{
 
 		// 平滑关闭http server
 		quit := make(chan os.Signal)
-		signal.Notify(quit, os.Interrupt, os.Kill)
+		signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 		<-quit
 
 		log.Println("收到server停止信号，等待现有连接关闭……")
