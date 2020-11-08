@@ -5,6 +5,9 @@
 # log file
 *.log
 
+# IDE
+/.idea
+
 # Test binary, built with `go test -c`
 *.test
 
